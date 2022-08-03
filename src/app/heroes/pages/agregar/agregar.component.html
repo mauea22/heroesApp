@@ -63,6 +63,15 @@
         Guardar
       </button>
 
+      <!-- el ngIf es para que el boton aparezca si se esta editando o sea si el heroe tiene id sino no aparece -->
+      <button  *ngIf="heroe.id"
+                mat-raised-button
+                color="warn"
+                (click)="eliminar()">
+        <mat-icon>delete</mat-icon>
+        Eliminar
+      </button>
+
     </div>
 
     <div fxFlex="50">

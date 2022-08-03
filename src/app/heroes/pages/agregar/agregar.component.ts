@@ -41,7 +41,7 @@ export class AgregarComponent implements OnInit {
     if(!this.router.url.includes('editar')){
       return;
     }
-    
+
     //cuando la aplicacion se contruye, verificamos el url
     this.activateRoute.params
     .pipe(
@@ -67,6 +67,10 @@ export class AgregarComponent implements OnInit {
               this.router.navigate(['/heroes/editar', heroe.id]);
             })
     }
+  }
+
+  eliminar(){
+    this.heroeService.eliminarHeroe(this.heroe.id!).subscribe(heroe => this.heroe = heroe )
   }
 
 }
