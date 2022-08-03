@@ -12,6 +12,7 @@ import { ListadoComponent } from './pages/listado/listado.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.component';
 import { HeroePipePipe } from './pipes/heroe-pipe.pipe';
+import { FormsModule } from "@angular/forms";
 
 
 
@@ -29,6 +30,7 @@ import { HeroePipePipe } from './pipes/heroe-pipe.pipe';
     CommonModule,
     HeroesRoutingModule,
     FlexLayoutModule,
+    FormsModule,
     MaterialModule
   ]
 })
