@@ -32,11 +32,16 @@ export class AgregarComponent implements OnInit {
     alt_img: '',
   }
 
-  constructor( private heroeService: HeroesService,
-               private activateRoute: ActivatedRoute,
-               private router: Router) { }
+  constructor(private heroeService: HeroesService,
+              private activateRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
+
+    if(!this.router.url.includes('editar')){
+      return;
+    }
+    
     //cuando la aplicacion se contruye, verificamos el url
     this.activateRoute.params
     .pipe(
