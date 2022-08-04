@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Heroe, Publisher } from '../../interfeces/heroes-interface';
 import { HeroesService } from '../../services/heroes.service';
 import { switchMap } from "rxjs/operators";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 
 @Component({
@@ -34,7 +37,9 @@ export class AgregarComponent implements OnInit {
 
   constructor(private heroeService: HeroesService,
               private activateRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private snackbar: MatSnackBar,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -59,18 +64,31 @@ export class AgregarComponent implements OnInit {
     if(this.heroe.id){
       //actualizar
       //hago un put mediante actualizarHeroe
-      this.heroeService.actualizarHeroe(this.heroe).subscribe(heroe => console.log('actualizando...', heroe))
+      this.heroeService.actualizarHeroe(this.heroe).subscribe(heroe => this.mostrarSnackbar('Registro actualizado'));
     }else {
       //crear
      //cuando hago el submit disparo agregarHeroe ( realiza el post) con el heroe como parametro
       this.heroeService.agregarHeroe( this.heroe).subscribe(heroe => {
               this.router.navigate(['/heroes/editar', heroe.id]);
+              this.mostrarSnackbar('Registro Creado');
             })
     }
   }
 
   eliminar(){
-    this.heroeService.eliminarHeroe(this.heroe.id!).subscribe(heroe => this.heroe = heroe )
+
+    this.dialog.open(DialogComponent, {
+      width:"250px"
+    })
+
+    //this.heroeService.eliminarHeroe(this.heroe.id!).subscribe(heroe => this.router.navigate(['/heroes'] ));
+  }
+
+
+  mostrarSnackbar( mensaje: string){
+    this.snackbar.open( mensaje, 'OK!!!', {
+      duration: 2500
+    });
   }
 
 }
