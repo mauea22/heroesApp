@@ -1,4 +1,9 @@
-<h1>Nuevo Heroe <small>{{heroe.superhero}}</small></h1>
+<h1>
+  <!-- muestra "Editar" si el heroe tiene id (estariamos en el componente editar) y si no lo tiene muestra "Nuevo" (estariamos en el componente añadir heroe) -->
+  {{ (heroe.id)?'Editar' :'Nuevo' }}
+  Héroe
+  <small>{{heroe.superhero}}</small>
+</h1>
 
 <div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column">
 
@@ -60,7 +65,7 @@
 
       <button mat-raised-button color="primary" (click)="guardar()">
         <mat-icon>edit</mat-icon>
-        Guardar
+        {{ (heroe.id) ?'Actualizar' :'Crear' }}
       </button>
 
       <!-- el ngIf es para que el boton aparezca si se esta editando o sea si el heroe tiene id sino no aparece -->
