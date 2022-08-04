@@ -42,12 +42,12 @@ export class AgregarComponent implements OnInit {
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
-
+    //verificamos si estamos en la ruta editar, si es asi, salimos
     if(!this.router.url.includes('editar')){
       return;
     }
 
-    //cuando la aplicacion se contruye, verificamos el url
+    //cuando la aplicacion se contruye, verificamos el url y obtenemos el id
     this.activateRoute.params
     .pipe(
       switchMap(({id}) => this.heroeService.getHeroePorId(id))
@@ -76,12 +76,18 @@ export class AgregarComponent implements OnInit {
   }
 
   eliminar(){
+      const dialog = this.dialog.open(DialogComponent, {
+      width:"250px",
+      //injectar la data del padre al componente dialog
+      data: this.heroe
+    });
 
-    this.dialog.open(DialogComponent, {
-      width:"250px"
+    dialog.afterClosed().subscribe( result => {
+      if (result){
+        this.heroeService.eliminarHeroe(this.heroe.id!).subscribe(heroe => this.router.navigate(['/heroes'] ));
+      }
     })
 
-    //this.heroeService.eliminarHeroe(this.heroe.id!).subscribe(heroe => this.router.navigate(['/heroes'] ));
   }
 
 

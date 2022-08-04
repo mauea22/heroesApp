@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Heroe } from '../../interfeces/heroes-interface';
 
 @Component({
   selector: 'app-dialog',
@@ -8,7 +9,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<DialogComponent>) { }
+  constructor(private dialogRef: MatDialogRef<DialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Heroe) { }
 
   ngOnInit(): void {
   }
