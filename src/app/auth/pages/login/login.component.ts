@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['./heroes'])
       }
     })
+
     //navegar a la pantalla
   }
 }
