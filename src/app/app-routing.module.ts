@@ -9,7 +9,8 @@ const routes: Routes = [
     path:'heroes',
     loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesModule),
     //canload es el guard que controla la carga del modulo
-    canLoad: [ AuthGuard ]
+    canLoad: [ AuthGuard ],
+    canActivate: [ AuthGuard ]
   },
   {
     path:'auth',
